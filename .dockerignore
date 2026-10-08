@@ -1,0 +1,9 @@
+# Only source files needed to build and test the image enter its build context.
+**
+!Dockerfile
+!requirements.txt
+!app.py
+!engine.py
+!test_engine.py
+!static/
+!static/**

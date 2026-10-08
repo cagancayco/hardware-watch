@@ -1,0 +1,10 @@
+services:
+  hardware-watch:
+    build: .
+    ports:
+      - "127.0.0.1:${HARDWARE_WATCH_PORT:-8765}:8765"
+    volumes:
+      - hardware-watch-data:/app/data
+
+volumes:
+  hardware-watch-data:

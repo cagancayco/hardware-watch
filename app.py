@@ -80,8 +80,8 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError,KeyError,TypeError) as e:self.response({'error':str(e)},400)
         except Exception as e:traceback.print_exc();self.response({'error':str(e)},500)
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=8765);parser.add_argument('--seed-folder',help='Optional local folder containing July/August exports');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--host',default='127.0.0.1',help='Bind address; use 0.0.0.0 inside a container');parser.add_argument('--port',type=int,default=8765);parser.add_argument('--seed-folder',help='Optional local folder containing July/August exports');args=parser.parse_args()
     if args.seed_folder:bootstrap(args.seed_folder)
-    state();print(f'Hardware Watch ready at http://127.0.0.1:{args.port}',flush=True)
-    ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
+    state();print(f'Hardware Watch ready at http://{args.host}:{args.port}',flush=True)
+    ThreadingHTTPServer((args.host,args.port),Handler).serve_forever()
 if __name__=='__main__':main()

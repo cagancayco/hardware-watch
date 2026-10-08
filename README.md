@@ -22,6 +22,37 @@ The monitoring engine uses deterministic rules, with no external AI calls or liv
 
 ## Run
 
+### Docker (quick start)
+
+With Docker and Docker Compose installed and running:
+
+```sh
+git clone https://github.com/cagancayco/hardware-watch.git
+cd hardware-watch
+docker compose up --build -d
+```
+
+Open **http://127.0.0.1:8765**. No local Python installation is needed. The private repository requires GitHub access to clone.
+
+The app starts with an empty inventory; import exports through **Data sources**. The named volume `hardware-watch-data` persists the database, uploads, and investigation notes across container restarts and rebuilds. Local exports and databases are excluded from the image's build context. The container runs as a non-root user, and Compose publishes the app only on localhost.
+
+```sh
+docker compose logs -f       # View server logs
+docker compose down          # Stop; keep saved data
+docker compose up --build -d # Rebuild and restart after pulling changes
+```
+
+If port 8765 is already occupied, run `HARDWARE_WATCH_PORT=8766 docker compose up --build -d` and open http://127.0.0.1:8766. Use the same port setting for subsequent Compose commands. `docker compose down --volumes` also deletes the saved data.
+
+To run without Compose:
+
+```sh
+docker build -t hardware-watch .
+docker run --rm -p 127.0.0.1:8765:8765 -v hardware-watch-data:/app/data hardware-watch
+```
+
+### Python
+
 On this Mac, double-click `start.command`, or run it from Terminal. It uses the available Codex Python runtime when no project virtual environment exists.
 
 Requires Python 3.10 or newer. For a fresh clone:
