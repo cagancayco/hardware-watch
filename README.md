@@ -2,6 +2,24 @@
 
 A local hackathon prototype for SU Hardware Program inventory monitoring, reconciliation, and departure-return planning. Open **http://127.0.0.1:8765** while the server is running.
 
+## Software stack
+
+Hardware Watch uses a lightweight stack with no frontend build step.
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Frontend | HTML, CSS, vanilla JavaScript | Dashboard, filters, asset timelines, imports, and investigation forms |
+| Backend | Python's built-in `ThreadingHTTPServer` | Serves the interface and JSON API |
+| Database | SQLite | Stores imported records, settings, and investigation decisions |
+| Data ingestion | Python `csv` and `openpyxl` | Reads CSV and Excel exports |
+| Monitoring engine | Python rules | Calculates stock movements, coverage gaps, billing exceptions, and departure matches |
+| Testing | Python `unittest` | Nine automated checks using synthetic fixtures |
+| CI | GitHub Actions | Runs tests on pushes and pull requests |
+
+The app runs locally at `http://127.0.0.1:8765`. Uploaded files and the database stay on the computer and are excluded from GitHub. Demo offboarding checklists are stored in the browser.
+
+The monitoring engine uses deterministic rules, with no external AI calls or live system connectors. Inventory and reconciliation refresh after imports; offboarding includes a labeled synthetic demo.
+
 ## Run
 
 On this Mac, double-click `start.command`, or run it from Terminal. It uses the available Codex Python runtime when no project virtual environment exists.
