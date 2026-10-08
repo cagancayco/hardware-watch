@@ -1,0 +1,25 @@
+# Local records, source exports, and investigation notes must stay off GitHub.
+/data/
+*.sqlite
+*.sqlite3
+*.db
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# Credentials and machine-specific state
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/
