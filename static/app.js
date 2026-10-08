@@ -6,7 +6,7 @@ const icon=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 const labels={overview:'Overview',inventory:'Inventory',reconciliation:'Reconciliation',offboarding:'Offboarding',imports:'Data sources'};
 let data,route='overview',search='',locationFilter='',statusFilter='Open',riskFilter='All',demo=true;
 async function api(path,body){const r=await fetch(path,body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{});const j=await r.json();if(!r.ok)throw Error(j.error||'Request failed');return j;}
-function toast(message,error=false){$('#toast').textContent=message;$('#toast').style.background=error?'#963d30':'#153f35';$('#toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').hidden=true,5500);}
+function toast(message,error=false){$('#toast').textContent=message;$('#toast').style.background=error?'var(--red)':'var(--ink)';$('#toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').hidden=true,5500);}
 async function refresh(){data=await api('/api/state');render();}
 function badge(text,color=''){return `<span class="badge ${color}">${esc(text)}</span>`;}
 function riskBadge(r){return badge(r,r==='Review'?'amber':r==='Watch'?'blue':r==='Covered'?'green':'');}
